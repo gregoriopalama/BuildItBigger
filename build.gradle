@@ -1,0 +1,26 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.google.guava:guava:22.0'
+        classpath 'com.android.tools.build:gradle:3.0.1'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        google()
+    }
+}
+
+task mainTask {
+    evaluationDependsOn ":backend"
+    dependsOn ':backend:appengineStart'
+    dependsOn ':app:connectedAndroidTest'
+    dependsOn ':backend:appengineStop'
+    doLast {
+        println 'All the tests run correctly!'
+    }
+}
